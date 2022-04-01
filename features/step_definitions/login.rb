@@ -1,21 +1,24 @@
 When 'I try to login with valid credentials' do
     @browser.element(name: 'email').send_keys 'user@phptravels.com'
     @browser.element(name: 'password').send_keys 'demouser'
-    @browser.element(name: 'Login').click
+    @browser.send_keys :return
 end
 
 Then 'I get to main user page' do
-    status = @browser.button(name: 'Logout').enabled?
+    status = @browser.button(text: 'Logout').enabled?
     expect(status).to eq(true)
+    @browser.button(text: 'Logout').click
+    @browser.close
 end
 
 When 'I try to login with invalid credentials' do
     @browser.element(name: 'email').send_keys 'user@usr.ur'
     @browser.element(name: 'password').send_keys 'user'
-    @browser.element(name: 'Login').click
+    @browser.send_keys :return
 end
 
 Then 'I get a error message' do
-    status = @browser.button(name: 'Login').enabled?
-    expect(status).to eq(true)
+    status = @browser.button(text: 'Login').enabled?
+    expect(status).to eq(false)
+    @browser.close
 end

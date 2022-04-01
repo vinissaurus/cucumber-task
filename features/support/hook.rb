@@ -5,7 +5,8 @@ Before do
     @browser = Selenium::WebDriver::Chrome::Service.driver_path = File.join(
       File.absolute_path('', File.dirname(__FILE__)), 'chromedriver'
     )
-    @browser = Watir::Browser.new :chrome, headless: false, options: { options: { detach: false } }
+    @browser = Watir::Browser.new :chrome, headless: false#, options: { options: { detach: false } }
+    
   end
   
   AfterStep do |_scenario|
