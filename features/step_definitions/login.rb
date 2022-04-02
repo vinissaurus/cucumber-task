@@ -5,10 +5,12 @@ When 'I try to login with valid credentials' do
 end
 
 Then 'I get to main user page' do
-    status = @browser.button(text: 'Logout').enabled?
+    @browser.goto 'https://www.phptravels.net/account/dashboard'
+    status = @browser.button(class: 'waves-effect').wait_until.enabled? do
     expect(status).to eq(true)
-    @browser.button(text: 'Logout').click
+    @browser.button(class: 'waves-effect').click
     @browser.close
+    end
 end
 
 When 'I try to login with invalid credentials' do
@@ -18,7 +20,7 @@ When 'I try to login with invalid credentials' do
 end
 
 Then 'I get a error message' do
-    status = @browser.button(text: 'Login').enabled?
-    expect(status).to eq(false)
+    status = @browser.button(class: 'waves-effect').wait_until.enabled? 
+    expect(status).to eq(true)
     @browser.close
 end
